@@ -21,15 +21,15 @@ namespace ASPCoreAPI.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [HttpGet]
-        public IActionResult getPopularBooks([FromQuery] int count)
+        [HttpGet("get-popular-books")]
+        public IActionResult GetPopularBooks([FromQuery] int count)
         {
             var popularBooks = _unitOfWork.BookRepository.GetPopularBook(count);
             return Ok(popularBooks);
         }
 
-        [HttpGet]
-        public IActionResult getAll()
+        [HttpGet("get-books")]
+        public IActionResult GetAll()
         {
             var allBooks = _unitOfWork.BookRepository.GetAll();
             return Ok(allBooks);
@@ -43,7 +43,7 @@ namespace ASPCoreAPI.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpPut]
         public IActionResult DeleteBook([FromBody] Book book)
         {
             _unitOfWork.BookRepository.Remove(book);
@@ -51,10 +51,11 @@ namespace ASPCoreAPI.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpPatch]
         public IActionResult UpdateBook([FromBody] Book book)
         {
-            _unitOfWork.BookRepository.
+            _unitOfWork.BookRepository.Update(book);
+            return Ok();
         }
     }
 }

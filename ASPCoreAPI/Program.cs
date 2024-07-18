@@ -1,8 +1,14 @@
 using ASPCoreAPI.Data;
+using ASPCoreAPI.Interfaces;
+using ASPCoreAPI.Repositories;
+using ASPCoreAPI.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddTransient<IBookRepository, BookRepository>();
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
