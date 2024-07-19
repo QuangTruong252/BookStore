@@ -1,0 +1,90 @@
+<div class="book-modal">
+    <div class="header flex-center justify-between">
+        <p>{{!bookForm.value.id ? 'Add' : 'Edit'}} Book</p>
+        <i class="pi pi-times" (click)="closeDialog()"></i>
+    </div>
+    <div class="body" [formGroup]="bookForm">
+        <div class="flex flex-column">
+            <label class="mb-10" for="title">Title</label>
+            <input 
+                pInputText
+                class="h32" 
+                id="title" 
+                formControlName="title"
+                />
+        </div>
+        <div class="flex flex-column">
+            <label class="mb-10" for="author">Author</label>
+            <input 
+                pInputText
+                class="h32" 
+                id="author" 
+                formControlName="author"
+                />
+        </div>
+        <div class="flex flex-column">
+            <label class="mb-10" for="price">Price</label>
+            <input 
+                pInputText
+                class="h32" 
+                pKeyFilter="int"
+                id="price" 
+                formControlName="price"
+                />
+        </div>
+        <div class="flex flex-column">
+            <label class="mb-10" for="description">Description</label>
+            <textarea 
+                rows="5" 
+                cols="30" 
+                pInputTextarea 
+                class="p-inputtext"
+                formControlName="description">
+            </textarea>
+        </div>
+        <div class="flex flex-column">
+            <label class="mb-10" for="file-upload">Image</label>
+            <input 
+                pInputText
+                class="h32" 
+                id="title" 
+                formControlName="imageUrl"
+                />
+        </div>
+        <div class="flex-center mb-10">
+            <label class="mr-10" for="rating">Rating</label>
+            <p-rating formControlName="star" [cancel]="false" />
+        </div>
+        <!-- <div class="flex-center mb-10">
+            <label class="mr-10" for="file-upload">Image</label>
+            <div class="mr-10 flex-center justify-between" *ngIf="uploadedFiles.length && !uploading">
+                <p-image 
+                    styleClass="book-image"
+                    [src]="uploadedFiles[0].objectURL" 
+                    alt="Image" 
+                    width="100" 
+                    [preview]="true" />
+                
+            </div>
+            <div class="image-loading mr-10" *ngIf="uploading">
+                <p-progressSpinner ariaLabel="loading" styleClass="image-progress"  />
+            </div>
+            <p-fileUpload 
+                mode="basic" 
+                chooseIcon="pi pi-upload" 
+                url="https://www.primefaces.org/cdn/api/upload.php" 
+                accept="image/*" 
+                (onUpload)="onUpload($event)" 
+                (onProgress)="onProgress($event)"
+                [auto]="true" 
+                size="small"
+                styleClass="image-upload"
+                [ngStyle]="{'opacity': uploading ? '0' : '1'}"
+                chooseLabel="{{uploadedFiles.length ? 'Change' : 'Upload'}}">
+            </p-fileUpload>
+        </div> -->
+    </div>
+    <div class="footer mt-10">
+        <p-button label="Save" styleClass="h32" (onClick)="onSave()" />
+    </div>
+</div>

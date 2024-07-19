@@ -1,1 +1,23 @@
-<p>book-store works!</p>
+<!-- <p-button label="Add Book"
+          icon="pi pi-plus-circle"
+          size="small"
+          (onClick)="openBookModal()" /> -->
+<div class="book-store-page">
+    <div class="page-header flex-center">
+        <div class="brand-wrapper flex-center">
+            <img class="mr-10" src="/logo.svg" alt="icon">
+            <div class="brand-name">
+                <p class="main">KeazonN</p>
+                <p class="sub">BOOKS</p>
+            </div>
+        </div>
+        <div class="navigate flex-center gap-1">
+            <p (click)="navigate(1)" [ngClass]="{'active': activeIndex === 1}">Store</p>
+            <p (click)="navigate(2)" [ngClass]="{'active': activeIndex === 2}">Dashboard</p>
+        </div>
+    </div>
+    <div class="page-body">
+        <app-book-home *ngIf="activeIndex === 1"></app-book-home>
+        <app-book-dashboard *ngIf="activeIndex === 2"></app-book-dashboard>
+    </div>
+</div>

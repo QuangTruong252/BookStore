@@ -1,0 +1,7 @@
+$page-bg: #242121;
+$header-bg: #292828;
+.book-container ::ng-deep {
+    height: calc(100vh - 80px);
+    background-color: $page-bg;
+    padding: 20px 100px;
+}

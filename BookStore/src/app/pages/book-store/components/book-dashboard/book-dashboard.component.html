@@ -1,0 +1,65 @@
+<div class="book-container">
+    <div class="header mb-10">
+        <p-button label="Add Book"
+                icon="pi pi-plus-circle"
+                size="small"
+                (onClick)="openBookModal()" />
+    </div>
+    <div class="body">
+        <div class="card">
+            <p-table [value]="books"
+                     [paginator]="true"
+                     [rows]="5"
+                     [scrollable]="true"
+                     [scrollHeight]="'500px'">
+                <ng-template pTemplate="caption">
+                    <div class="flex align-items-center justify-content-between">
+                        Books
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Name</th>
+                        <th>Image</th>
+                        <th>Price</th>
+                        <th>Author</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body"
+                             let-book>
+                    <tr>
+                        <td>{{book.title}}</td>
+                        <td><img [src]="book.imageUrl"
+                                 [alt]="book.title"
+                                 width="100"
+                                 class="shadow-4" /></td>
+                        <td>{{book.price | currency:'USD'}}</td>
+                        <td>{{book.author}}</td>
+                        <td><p-rating [(ngModel)]="book.star"
+                                      [readonly]="true"
+                                      [cancel]="false" /></td>
+                        <td>
+                            <p-button icon="pi pi-pen-to-square"
+                                      [rounded]="true"
+                                      [text]="true"
+                                      (onClick)="openBookModal(book)" />
+                            <p-button icon="pi pi-times"
+                                      [rounded]="true"
+                                      [text]="true"
+                                      severity="danger"
+                                      (onClick)="deleteBook(book)" />
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="flex align-items-center justify-content-between">
+                        In total there are {{books ? books.length : 0 }} books.
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+<p-toast key="success" />

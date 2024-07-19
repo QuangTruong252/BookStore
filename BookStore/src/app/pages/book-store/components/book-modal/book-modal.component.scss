@@ -1,0 +1,52 @@
+::ng-deep .book-dialog-container {
+    width: 600px;
+    .p-dialog-content {
+        padding: 1.5rem !important;
+        border-radius: 6px !important;
+    }
+    .book-modal {
+        .header {
+            & > p {
+                font-size: 18px;
+                font-weight: 500;
+            }
+            & > i {
+                cursor: pointer;
+            }
+            margin-bottom: 1.5rem;
+        }
+        .body {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            .image-upload {
+                padding: 8px;
+                font-size: 14px;
+            }
+            .book-image {
+                img, button {
+                    border-radius: 6px;
+                    height: 70px;
+                }
+            }
+            .image-loading {
+                width: 100px;
+                height: 70px;
+                border-radius: 6px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #d1d5db;
+                .image-progress {
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+        }
+        .footer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+    }
+}

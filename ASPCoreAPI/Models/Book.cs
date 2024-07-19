@@ -12,8 +12,8 @@ namespace ASPCoreAPI.Models
         public string Author { get; set; }
         [Range(0, double.MaxValue)]
         public double Price { get; set; }
-        [Range(0, 4)]
+        [Range(1, 5)]
         public int Star { get; set; }
-
+        public string? imageUrl { get; set; }
     }
 }

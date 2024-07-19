@@ -1,13 +1,50 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { BookStoreComponent } from './book-store.component';
-
-
+import { BookStoreRoutingModule } from './book-store-routing.module';
+import { BookModalComponent } from './components/book-modal/book-modal.component';
+import { ButtonModule } from 'primeng/button';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { KeyFilterModule } from 'primeng/keyfilter';
+import { RatingModule } from 'primeng/rating';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ImageModule } from 'primeng/image';
+import { ToastModule } from 'primeng/toast';
+import { CommonModule } from '@angular/common';  
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TableModule } from 'primeng/table';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { BookHomeComponent } from './components/book-home/book-home.component';
+import { BookDashboardComponent } from './components/book-dashboard/book-dashboard.component';
+const MODULES = [
+  BookStoreRoutingModule,
+  ButtonModule,
+  DynamicDialogModule,
+  InputTextModule,
+  FormsModule,
+  ReactiveFormsModule,
+  KeyFilterModule,
+  RatingModule,
+  FileUploadModule,
+  ImageModule,
+  CommonModule,
+  ProgressSpinnerModule,
+  ToastModule,
+  TableModule,
+  OverlayPanelModule
+]
 
 @NgModule({
-  declarations: [BookStoreComponent],
+  declarations: [
+    BookStoreComponent,
+    BookModalComponent,
+    BookHomeComponent,
+    BookDashboardComponent
+  ],
   imports: [
-    CommonModule
-  ]
+    ...MODULES
+  ],
+  exports: [BookStoreComponent]
 })
 export class BookStoreModule { }

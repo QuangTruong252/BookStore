@@ -27,6 +27,8 @@ builder.Services.AddDbContext<BookStoreContext>(options =>
 
 var app = builder.Build();
 
+// Apply the CORS policy
+app.UseCors();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

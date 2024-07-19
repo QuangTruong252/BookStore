@@ -40,7 +40,7 @@ namespace ASPCoreAPI.Controllers
         {
             _unitOfWork.BookRepository.Add(book);
             _unitOfWork.Complete();
-            return Ok();
+            return Ok(book);
         }
 
         [HttpPut]
@@ -48,14 +48,15 @@ namespace ASPCoreAPI.Controllers
         {
             _unitOfWork.BookRepository.Remove(book);
             _unitOfWork.Complete();
-            return Ok();
+            return Ok(book);
         }
 
         [HttpPatch]
         public IActionResult UpdateBook([FromBody] Book book)
         {
             _unitOfWork.BookRepository.Update(book);
-            return Ok();
+            _unitOfWork.Complete();
+            return Ok(book);
         }
     }
 }
