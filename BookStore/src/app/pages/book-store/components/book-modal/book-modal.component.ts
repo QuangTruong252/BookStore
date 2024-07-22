@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { BookService } from '../../../../services/book.service';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-book-modal',
@@ -11,7 +10,7 @@ import { MessageService } from 'primeng/api';
 })
 export class BookModalComponent {
   public bookForm: FormGroup;
-  public uploadedFiles:any = [];
+  public uploadedFile:any = undefined;
   public uploading: boolean = false;
   constructor(
     private bookService: BookService,
@@ -25,7 +24,12 @@ export class BookModalComponent {
     if(this.dialogConfig.data) {
       const bookEdit = this.dialogConfig.data;
       this.bookForm.patchValue(bookEdit);
-      console.log("edit", this.bookForm.value);
+      if(bookEdit.image) {
+        this.uploadedFile = {
+          image: bookEdit.image,
+        }
+      }
+      console.log("book edit", bookEdit);
     }
   }
   
@@ -37,7 +41,8 @@ export class BookModalComponent {
       author: new FormControl(''),
       price: new FormControl(undefined),
       star: new FormControl(''),
-      imageUrl: new FormControl(undefined),
+      image: new FormControl(undefined),
+      imageFile: new FormControl(undefined)
     })
   }
 
@@ -72,14 +77,20 @@ export class BookModalComponent {
     })
   }
 
-  onUpload(event: any) {
-    this.uploadedFiles = event.files;
-    console.log("files", this.uploadedFiles);
-    
-    const fileUrl = this.uploadedFiles[0]?.objectURL.changingThisBreaksApplicationSecurity;
-    this.bookForm.get('imageUrl')?.setValue(fileUrl);
-    this.uploading = false;
-    this.cdr.detectChanges();
+  async onUpload(event: any) {
+    this.uploadedFile = event.files[0];
+    const reader = new FileReader();
+    let blob = await fetch(this.uploadedFile.objectURL).then(r => r.blob());
+    reader.readAsDataURL(blob);
+    reader.onloadend = () => {
+      const base64data = reader.result;
+      this.bookForm.get('image')?.setValue(this.uploadedFile?.name);
+      this.bookForm.get('imageFile')?.setValue(base64data);
+      console.log("base 64", base64data);
+      
+      this.uploading = false;
+      this.cdr.detectChanges();
+    }
   }
 
   onProgress(event: any) {

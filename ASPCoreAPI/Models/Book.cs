@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ASPCoreAPI.Models
 {
@@ -14,6 +15,8 @@ namespace ASPCoreAPI.Models
         public double Price { get; set; }
         [Range(1, 5)]
         public int Star { get; set; }
-        public string? imageUrl { get; set; }
+        public string? Image { get; set; }
+        [NotMapped]
+        public string? ImageFile { get; set; }
     }
 }

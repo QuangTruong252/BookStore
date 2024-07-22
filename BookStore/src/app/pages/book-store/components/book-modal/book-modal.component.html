@@ -42,25 +42,16 @@
                 formControlName="description">
             </textarea>
         </div>
-        <div class="flex flex-column">
-            <label class="mb-10" for="file-upload">Image</label>
-            <input 
-                pInputText
-                class="h32" 
-                id="title" 
-                formControlName="imageUrl"
-                />
-        </div>
         <div class="flex-center mb-10">
             <label class="mr-10" for="rating">Rating</label>
             <p-rating formControlName="star" [cancel]="false" />
         </div>
-        <!-- <div class="flex-center mb-10">
+        <div class="flex-center mb-10">
             <label class="mr-10" for="file-upload">Image</label>
-            <div class="mr-10 flex-center justify-between" *ngIf="uploadedFiles.length && !uploading">
+            <div class="mr-10 flex-center justify-between" *ngIf="uploadedFile && !uploading">
                 <p-image 
                     styleClass="book-image"
-                    [src]="uploadedFiles[0].objectURL" 
+                    [src]="(uploadedFile.objectURL || uploadedFile.image) | image" 
                     alt="Image" 
                     width="100" 
                     [preview]="true" />
@@ -80,9 +71,9 @@
                 size="small"
                 styleClass="image-upload"
                 [ngStyle]="{'opacity': uploading ? '0' : '1'}"
-                chooseLabel="{{uploadedFiles.length ? 'Change' : 'Upload'}}">
+                chooseLabel="{{uploadedFile ? 'Change' : 'Upload'}}">
             </p-fileUpload>
-        </div> -->
+        </div>
     </div>
     <div class="footer mt-10">
         <p-button label="Save" styleClass="h32" (onClick)="onSave()" />

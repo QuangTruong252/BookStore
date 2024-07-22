@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ASPCoreAPI.Data;
+﻿using ASPCoreAPI.Interfaces;
 using ASPCoreAPI.Models;
-using ASPCoreAPI.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ASPCoreAPI.Controllers
 {
@@ -16,9 +9,14 @@ namespace ASPCoreAPI.Controllers
     public class BooksController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
-        public BooksController(IUnitOfWork unitOfWork)
+        private readonly IFileService _fileService;
+        public BooksController(
+            IUnitOfWork unitOfWork,
+            IFileService fs
+            )
         {
             _unitOfWork = unitOfWork;
+            _fileService = fs;
         }
 
         [HttpGet("get-popular-books")]
@@ -29,15 +27,24 @@ namespace ASPCoreAPI.Controllers
         }
 
         [HttpGet("get-books")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetBooks([FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] string search = "")
         {
-            var allBooks = _unitOfWork.BookRepository.GetAll();
-            return Ok(allBooks);
+            var books = await _unitOfWork.BookRepository.GetBooks(page, pageSize, search);
+            return Ok(books);
         }
 
         [HttpPost]
         public IActionResult AddBook([FromBody] Book book)
         {
+            if (book.ImageFile != null && book.Image != null)
+            {
+                IFormFile file = _fileService.Base64ToImage(book.ImageFile, book.Image);
+                var fileResult = _fileService.SaveImage(file);
+                if (fileResult.Item1 == 1)
+                {
+                    book.Image = fileResult.Item2;
+                }
+            }
             _unitOfWork.BookRepository.Add(book);
             _unitOfWork.Complete();
             return Ok(book);

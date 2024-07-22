@@ -17,6 +17,8 @@ import { TableModule } from 'primeng/table';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { BookHomeComponent } from './components/book-home/book-home.component';
 import { BookDashboardComponent } from './components/book-dashboard/book-dashboard.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { SharedModule } from '../../shared/shared.module';
 const MODULES = [
   BookStoreRoutingModule,
   ButtonModule,
@@ -32,7 +34,9 @@ const MODULES = [
   ProgressSpinnerModule,
   ToastModule,
   TableModule,
-  OverlayPanelModule
+  OverlayPanelModule,
+  SharedModule,
+  DropdownModule
 ]
 
 @NgModule({
@@ -40,7 +44,7 @@ const MODULES = [
     BookStoreComponent,
     BookModalComponent,
     BookHomeComponent,
-    BookDashboardComponent
+    BookDashboardComponent,
   ],
   imports: [
     ...MODULES

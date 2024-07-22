@@ -31,7 +31,7 @@
                              let-book>
                     <tr>
                         <td>{{book.title}}</td>
-                        <td><img [src]="book.imageUrl"
+                        <td><img [src]="book.image | image"
                                  [alt]="book.title"
                                  width="100"
                                  class="shadow-4" /></td>

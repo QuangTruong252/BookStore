@@ -8,13 +8,13 @@
         @for (book of data; track book.id) {
             <div class="flip">
                 <div class="front">
-                    <p-image *ngIf="book.imageUrl"
-                            [src]="book.imageUrl"
+                    <p-image *ngIf="book.image"
+                            [src]="book.image | image"
                             alt="Image"
                             class="book-image"
                             width="250"
                             height="350" />
-                    <div class="book-noimage" *ngIf="!book.imageUrl">
+                    <div class="book-noimage" *ngIf="!book.image">
                         <i class="pi pi-book" style="font-size: 2.5rem"></i>
                     </div>
                 </div>

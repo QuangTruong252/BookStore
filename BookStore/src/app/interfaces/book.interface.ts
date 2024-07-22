@@ -1,9 +1,10 @@
 export interface Book {
-    id: Int16Array,
+    id: number,
     title: string,
     description?: string,
     author?: string,
-    price: Int16Array,
-    star: Int16Array,
-    imageUrl: string,
+    price: number,
+    star: number,
+    image?: string,
+    imageFile?: string,
 }
